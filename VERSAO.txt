@@ -1,0 +1,3 @@
+STUDIO BETH'S DESIGNERS · Edição Rosa Borboleta · 2026-11-18
+Frontend, Supabase, painel admin, colaboradores, QR code, avaliações, WhatsApp manual.
+Agenda inicialmente DESATIVADA: configurar dias e horários no painel.

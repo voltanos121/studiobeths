@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Studio Beth's Designers — unhas de gel, fibra, manicure, pedicure e spa dos pés no Centro de Araruama/RJ. Agende online ou pelo WhatsApp.">
+  <meta name="theme-color" content="#9d4e70">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Studio Beth's Designers | Manicure &amp; Unhas em Gel">
+  <meta property="og:description" content="Manicure, unhas em gel, fibra e spa dos pés no Centro de Araruama/RJ. Atendimento com agendamento online.">
+  <meta property="og:image" content="assets/francesinha-delicada.jpg">
+  <title>Studio Beth's Designers | Unhas em Gel, Fibra &amp; Manicure</title>
+  <link rel="icon" type="image/svg+xml" href="assets/marca-beth.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/hero-unhas-rosas.jpg" as="image">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BeautySalon", "name": "Studio Beth's Designers", "description": "Nail designer, manicure e cuidados com unhas em gel e fibra", "address": {"@type": "PostalAddress", "streetAddress": "R. Mário Vasconcelos, 60 - loja 01 - Centro", "addressLocality": "Araruama", "addressRegion": "RJ", "postalCode": "28979-132", "addressCountry": "BR"}, "telephone": "+55 22 98833-4019", "hasMap": "https://maps.google.com/?cid=12011292072847203588&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA", "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "32"}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="announcement"><div class="container"><span>✦ &nbsp; ARARUAMA · RIO DE JANEIRO</span><span>Beleza, técnica e atenção em cada detalhe</span><a data-contact-whatsapp href="https://wa.me/5522988334019" target="_blank" rel="noopener">Fale conosco <span aria-hidden="true">↗</span></a></div></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Studio Beth's Designers — início">
+        <img class="brand-mark" src="assets/marca-beth.svg" alt="" width="46" height="46">
+        <span><strong>Beth's</strong><small>STUDIO <span>✧</span> DESIGNERS</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-controls="mainNav" aria-expanded="false">☰</button>
+      <nav id="mainNav" aria-label="Navegação principal"><a href="#inicio">Início</a><a href="#sobre">Sobre nós</a><a href="#servicos">Serviços</a><a href="#galeria">Inspirações</a><a href="#depoimentos">Avaliações</a><a href="#contato">Localização</a></nav>
+      <a class="button button-dark nav-cta" href="#agenda">Agende sua visita <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-orb" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="tiny-flower">✳</span> MANICURE &amp; NAIL DESIGNER · ARARUAMA, RJ</div>
+          <h1>Unhas que<br>revelam a <em>sua essência.</em></h1>
+          <p>Nail designer, unhas de gel e fibra, manicure e spa dos pés. Seu espaço de beleza no Centro de Araruama.</p>
+          <div class="hero-actions"><a class="button button-dark" href="#agenda">Quero agendar <span>↗</span></a><a class="text-link" href="#servicos">Conhecer serviços <span>↗</span></a></div>
+          <div class="hero-proof"><div class="star-icons" aria-label="5 estrelas">★★★★★</div><div><strong>4,9 de 5 · 32 avaliações</strong><small>Nota e quantidade de avaliações informadas no site original</small></div></div>
+        </div>
+        <div class="hero-visual"><div class="hero-photo"><img src="assets/hero-unhas-rosas.jpg" alt="Imagem ilustrativa de unhas rosadas com detalhes dourados" fetchpriority="high" width="808" height="941"></div><div class="hero-image-label">UNHAS <span>✧</span> BELEZA <span>✧</span> BORBOLETAS</div><div class="round-stamp" aria-hidden="true"><span>✦</span><b>BEAUTY</b><small>IN EVERY<br>DETAIL</small></div></div>
+      </div>
+      <div class="container hero-bottom"><span>MANICURE · UNHAS DE GEL · FIBRA · SPA DOS PÉS</span><a href="#sobre">CONHEÇA O STUDIO BETH'S <span>↓</span></a></div>
+    </section>
+    <div class="values-ribbon" aria-hidden="true"><div class="ribbon-inner">FEITO COM CARINHO <span>✳</span> UNHAS EM GEL <span>✳</span> ELEGÂNCIA NOS DETALHES <span>✳</span> TODO CUIDADO É ESPECIAL <span>✳</span> FEITO COM CARINHO <span>✳</span> UNHAS EM GEL</div></div>
+
+    <section class="intro section" id="sobre"><div class="container intro-grid"><div class="intro-visual"><img src="assets/francesinha-delicada.jpg" alt="Inspiração ilustrativa de esmaltação rosada e nail art" loading="lazy" width="1536" height="554"><div class="visual-caption"><span>✳</span><p>Pequenos detalhes.<br><em>Grandes expressões.</em></p></div></div><div class="intro-text"><span class="eyebrow">01 — BEM-VINDA AO STUDIO BETH'S</span><h2>Seu estilo merece <em>um cuidado especial.</em></h2><p id="aboutText">Unhas de gel, fibra, manicure e pedicure com delicadeza e atenção aos detalhes no Centro de Araruama/RJ.</p><p>Do esmalte tradicional às técnicas de gel e fibra: escolha o cuidado que combina com o seu estilo.</p><a href="#agenda" class="under-link">Reserve um momento para você <span>↗</span></a><div class="feature-strip"><div><b>01</b><span>Manicure</span></div><div><b>02</b><span>Alongamento</span></div><div><b>03</b><span>Spa dos pés</span></div></div></div></div></section>
+
+    <section class="section services-section" id="servicos"><div class="container"><div class="section-heading"><div><span class="eyebrow">02 — ESCOLHA SEU CUIDADO</span><h2>Nosso menu de <em>beleza.</em></h2></div><p>Valores reproduzidos das tabelas enviadas pela loja. Escolha entre gel, fibra, francesinha, manicure e spa dos pés.</p></div><div class="service-filters" id="serviceFilters" aria-label="Filtrar serviços"><button class="active" type="button" data-category="todos">Todos os serviços</button><button type="button" data-category="alongamento">Gel &amp; fibra</button><button type="button" data-category="manicure">Manicure &amp; pedicure</button><button type="button" data-category="spa">Spa dos pés</button></div><div class="service-grid" id="servicesGrid"><article class="loading-card">Carregando serviços...</article></div></div></section>
+    <div class="payment-note"><div class="container payment-inner"><span aria-hidden="true">✧</span><p><strong>Formas de pagamento:</strong> PIX e dinheiro; cartão de crédito ou débito (sujeito à taxa da máquina).</p><span aria-hidden="true">✧</span></div></div>
+    <section class="feature-banner"><div class="container feature-banner-grid"><div class="feature-banner-photo"><img loading="lazy" src="assets/aplicacao-gel.jpg" alt="Imagem ilustrativa de aplicação profissional de gel nas unhas"></div><div class="feature-banner-text"><span class="eyebrow">UM TOQUE DE SOFISTICAÇÃO</span><h2>Beleza que se<br>constrói <em>nos detalhes.</em></h2><p>Técnicas, cores e acabamentos para expressar seu estilo em cada ocasião.</p><a class="button button-outline" href="#agenda">Escolher horário ↗</a></div></div></section>
+
+    <section class="gallery-section section" id="galeria"><div class="container"><div class="section-heading"><div><span class="eyebrow">03 — INSPIRE-SE</span><h2>Um universo de <em>possibilidades.</em></h2></div><p>Imagens ilustrativas de estilo e inspiração. As fotos reais de trabalhos poderão ser publicadas pelo painel administrativo.</p></div><div class="gallery-filters" id="galleryFilters"><button class="filter active" data-filter="all" type="button">Todas</button></div><div class="gallery-grid" id="galleryGrid"><div class="loading-card">Carregando inspirações...</div></div></div></section>
+
+    <section class="testimonials-section section" id="depoimentos"><div class="container testimonials-grid"><div><span class="eyebrow">04 — O QUE DIZEM</span><h2>A beleza também está em <em>ser bem atendida.</em></h2><div class="rating-large"><span>4,9 <b>★★★★★</b></span><small>32 avaliações registradas no site original</small></div></div><blockquote class="testimonial"><span class="quote-mark" aria-hidden="true">“</span><p>Atendimento excelente e resultado acima do esperado.</p><footer><span class="testimonial-avatar">CS</span><span><strong>Cliente satisfeito</strong><small>Google — depoimento exibido no site original</small></span></footer></blockquote></div></section>
+
+    <section class="hours-section" id="horarios"><div class="container hours-grid"><div><span class="eyebrow">AGENDA SOB CONSULTA</span><h2>Escolha <em>seu momento.</em></h2></div><div class="hours-list" id="hoursList"><div><span>Horários de atendimento</span><b>Consulte pelo WhatsApp</b></div><small>A loja não informou horários de funcionamento no material fornecido. A administradora poderá configurar a agenda no sistema.</small></div></div></section>
+
+    <section class="booking-section section" id="agenda"><div class="container booking-layout"><div class="booking-intro"><span class="eyebrow">05 — AGENDE SEU MOMENTO</span><h2>Seu próximo cuidado começa <em>aqui.</em></h2><p>Escolha o serviço, a profissional, a data e um horário livre. Sua solicitação será registrada no sistema e ficará aguardando confirmação.</p><div class="booking-assurance"><span>01</span><div><b>Agenda atualizada</b><small>Horários já ocupados não ficam disponíveis para seleção.</small></div></div><div class="booking-assurance"><span>02</span><div><b>Mensagem manual no WhatsApp</b><small>Ao finalizar, você poderá abrir uma mensagem pronta para a profissional escolhida. O site não envia mensagens automaticamente.</small></div></div><div class="booking-assurance"><span>03</span><div><b>Dados da reserva</b><small>Guarde seu código de agendamento para avaliar seu atendimento depois.</small></div></div><div class="booking-side-image"><img src="assets/espaco-esmaltes.jpg" loading="lazy" alt="Imagem ilustrativa de esmaltes e espaço de manicure"></div></div>
+      <form class="booking-card" id="bookingForm"><div class="form-title"><span>AGENDAMENTO ONLINE</span><h3>Reserve seu horário</h3><p>Preencha as informações abaixo.</p></div>
+        <label>Seu nome<input name="name" autocomplete="name" required maxlength="100" placeholder="Como podemos chamar você?"></label>
+        <label>WhatsApp<input name="phone" autocomplete="tel" inputmode="tel" required maxlength="25" placeholder="(22) 99999-9999"></label>
+        <label>Serviço<select name="service" id="serviceSelect" required><option value="">Carregando serviços...</option></select></label>
+        <label>Profissional<select name="staff" id="staffSelect" required><option value="">Carregando profissionais...</option></select></label>
+        <label>Data do atendimento<input type="date" name="date" id="bookingDate" required></label>
+        <div class="slot-label"><label>Horários disponíveis</label><span>Intervalos de 30 min</span></div>
+        <div class="slots" id="slots"><p class="muted">Selecione o serviço, a profissional e a data para consultar os horários.</p></div>
+        <input type="hidden" name="time" id="selectedTime">
+        <label>Observações <small>(opcional)</small><textarea name="notes" rows="3" maxlength="600" placeholder="Há algum detalhe especial para o atendimento?"></textarea></label>
+        <button class="button button-dark button-full" type="submit" id="bookingSubmit">Registrar agendamento <span>↗</span></button>
+        <p class="form-legal">Usaremos seus dados apenas para organizar e acompanhar o atendimento. Seu agendamento estará pendente até a confirmação da equipe.</p>
+        <div class="form-feedback" id="bookingFeedback" role="status" aria-live="polite"></div>
+      </form>
+    </div></section>
+
+    <section class="review-section section" id="avaliar"><div class="container booking-layout"><div class="booking-intro"><span class="eyebrow">06 — SUA EXPERIÊNCIA</span><h2>Conte como foi seu <em>atendimento.</em></h2><p>Depois da conclusão do serviço, você poderá avaliar a profissional. Use o código da reserva e o WhatsApp informado ao agendar.</p><div class="booking-assurance"><span>★</span><div><b>Avaliação vinculada ao atendimento</b><small>Cada reserva concluída pode receber apenas uma avaliação.</small></div></div></div>
+      <form class="booking-card" id="reviewForm"><div class="form-title"><span>SUA OPINIÃO IMPORTA</span><h3>Avalie sua experiência</h3></div>
+        <label>Código do agendamento<input name="code" required maxlength="16" placeholder="Ex.: A1B2C3D4E5"></label>
+        <label>WhatsApp da reserva<input name="phone" required maxlength="25" placeholder="(22) 99999-9999"></label>
+        <label>Nota<select name="rating" required><option value="">Selecione uma nota</option><option value="5">★★★★★ — Excelente</option><option value="4">★★★★☆ — Muito bom</option><option value="3">★★★☆☆ — Bom</option><option value="2">★★☆☆☆ — Regular</option><option value="1">★☆☆☆☆ — Precisa melhorar</option></select></label>
+        <label>Comentário <small>(opcional)</small><textarea name="comment" rows="3" maxlength="500" placeholder="Compartilhe sua experiência..."></textarea></label>
+        <button class="button button-dark button-full" type="submit" id="reviewSubmit">Enviar avaliação ↗</button>
+        <p class="form-legal">Não inclua informações pessoais no comentário.</p>
+        <div class="form-feedback" id="reviewFeedback" role="status" aria-live="polite"></div>
+      </form>
+    </div></section>
+
+    <section class="contact-section section" id="contato"><div class="container"><div class="section-heading"><div><span class="eyebrow">07 — VENHA NOS CONHECER</span><h2>Uma visita, um novo <em>momento seu.</em></h2></div><p>Estamos no Centro de Araruama. Conheça nosso espaço e cuide de você.</p></div><div class="contact-grid"><div class="contact-info"><div class="contact-list"><div><span>WHATSAPP / TELEFONE</span><a id="contactPhone" href="tel:+5522988334019">+55 22 98833-4019</a></div><div><span>ENDEREÇO</span><p id="contactAddress">R. Mário Vasconcelos, 60 - loja 01 - Centro, Araruama - RJ, 28979-132</p></div><div><span>HORÁRIO DE ATENDIMENTO</span><p id="contactHours">Horários sob consulta. Confirme pelo WhatsApp ou consulte a agenda online.</p></div></div><div class="contact-actions"><a class="button button-dark" data-contact-whatsapp href="https://wa.me/5522988334019" target="_blank" rel="noopener">Chamar no WhatsApp ↗</a><a class="button button-light" id="mapsButton" target="_blank" rel="noopener" href="https://maps.google.com/?cid=12011292072847203588&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA">Traçar rota ↗</a></div></div><div class="map-card"><iframe id="mapFrame" title="Localização do Studio Beth's Designers no Centro de Araruama" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=R.%20M%C3%A1rio%20Vasconcelos%2C%2060%20-%20loja%2001%20-%20Centro%2C%20Araruama%20-%20RJ%2C%2028979-132&amp;output=embed"></iframe><div class="map-caption"><div><b>Studio Beth's Designers</b><small id="mapAddress">R. Mário Vasconcelos, 60 - loja 01 - Centro, Araruama - RJ, 28979-132</small></div><a id="mapOpen" target="_blank" rel="noopener" href="https://maps.google.com/?cid=12011292072847203588&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA">Ver no mapa ↗</a></div></div></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand" href="#inicio"><img class="brand-mark" src="assets/marca-beth.svg" width="48" height="48" alt=""><span><strong>Beth's</strong><small>STUDIO <span>✧</span> DESIGNERS</small></span></a><p>Unhas em gel, fibra, manicure e spa dos pés em Araruama/RJ.</p></div><div><h4>NAVEGAÇÃO</h4><a href="#servicos">Serviços</a><a href="#galeria">Inspirações</a><a href="#agenda">Agendamento</a><a href="#depoimentos">Avaliações</a></div><div><h4>CONTATO</h4><a data-contact-whatsapp data-display-phone href="https://wa.me/5522988334019" target="_blank" rel="noopener">+55 22 98833-4019</a><span>R. Mário Vasconcelos, 60, loja 01 — Centro, Araruama/RJ</span><a href="funcionario.html">Área dos profissionais</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> Studio Beth's Designers · Todos os direitos reservados.</span><div><a href="#avaliar">Avaliar atendimento</a><a href="admin.html">Administração</a><a href="#inicio">Voltar ao topo ↑</a></div></div></footer>
+  <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/5522988334019" target="_blank" rel="noopener" aria-label="Falar com a Beth's pelo WhatsApp">◉ <span>WhatsApp</span></a>
+  <div class="modal" id="successModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="successHeading"><div class="modal-panel"><button class="modal-close" id="modalClose" type="button" aria-label="Fechar mensagem">×</button><div class="success-mark">✓</div><span class="eyebrow">AGENDAMENTO REGISTRADO</span><h2 id="successHeading">Seu momento foi <em>reservado para confirmação.</em></h2><p id="successDetails"></p><p class="modal-small">Sua reserva está salva. Para avisar a profissional, toque no botão e envie a mensagem manualmente no WhatsApp.</p><a class="button button-dark button-full" id="successWhatsApp" target="_blank" rel="noopener">Abrir WhatsApp da profissional ↗</a><button class="button button-light button-full" id="closeModalExtra" type="button" onclick="document.getElementById('modalClose').click()">Voltar ao site</button></div></div>
+</body>
+</html>
