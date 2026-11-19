@@ -49,7 +49,62 @@ h1,h2,h3{letter-spacing:-.04em}
 .payment-note span{color:#a85f7e;font-size:28px}.payment-note p{font-size:13px}.payment-note strong{color:#63344e}
 .feature-banner{background:#a76586}.feature-banner-text{color:#fff}.gallery-section{background:#fff9fa}.gallery-item{border-radius:14px;overflow:hidden}
 .testimonials-section{background:#fbe9f0}.testimonial{background:#fff;border:1px solid #eecedb;border-radius:22px}.rating-large span{color:#8a405e}
-.hours-section{background:#f8edf1}.booking-section{background:#fff8fc}.review-section{background:#f8eaf0}.contact-section{background:#fffafd}
+.hours-section{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(60px,7vw,96px) 0;
+  background:linear-gradient(118deg,#fff2f7 0%,#fdf4f7 48%,#f7e4ed 100%);
+  color:#522b40;
+  border-top:1px solid #f0d9e3;
+  border-bottom:1px solid #eed7e0;
+}
+.hours-section::before{
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  left:-160px;
+  bottom:-210px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(216,152,180,.25),transparent 70%);
+  pointer-events:none;
+}
+.hours-section .hours-grid{
+  position:relative;
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  gap:clamp(28px,6vw,95px);
+  align-items:center;
+}
+.hours-section .eyebrow{color:#89445f;letter-spacing:.17em}
+.hours-section h2{color:#532a40;line-height:1.1;margin:16px 0 0}
+.hours-section h2 em{color:#a65b7d}
+.hours-section .hours-list{
+  background:rgba(255,255,255,.94);
+  border:1px solid #ead1dd;
+  border-radius:22px;
+  padding:22px clamp(20px,3vw,36px);
+  box-shadow:0 18px 48px rgba(112,62,86,.10);
+}
+.hours-section .hours-list > div{
+  border-bottom:1px solid #f0e2e8;
+  padding:13px 0;
+  color:#633b50;
+  font-size:14px;
+  gap:18px;
+}
+.hours-section .hours-list > div:last-of-type{border-bottom:0}
+.hours-section .hours-list span{color:#755366;font-weight:500}
+.hours-section .hours-list b{color:#763b57;font-weight:700;text-align:right;white-space:nowrap}
+.hours-section .hours-list small{color:#806d75;line-height:1.5;font-size:11px;margin-top:15px}
+@media(max-width:760px){
+  .hours-section .hours-grid{grid-template-columns:1fr;gap:26px}
+  .hours-section h2{font-size:clamp(36px,9vw,52px)}
+}
+@media(max-width:400px){
+  .hours-section .hours-list{padding:14px 18px}
+  .hours-section .hours-list > div{font-size:12px;gap:10px}
+}
+.booking-section{background:#fff8fc}.review-section{background:#f8eaf0}.contact-section{background:#fffafd}
 .contact-info{background:#80425e;border-radius:22px}.map-card{border-radius:22px;overflow:hidden}
 .booking-card{border-radius:22px;background:#fff;box-shadow:0 20px 65px #9d69801f}
 .booking-card input,.booking-card select,.booking-card textarea{border-color:#edd4de;border-radius:9px}.slot{border-radius:7px}
