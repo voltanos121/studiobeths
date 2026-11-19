@@ -10,9 +10,55 @@
  function showView(name){currentView=name;document.querySelectorAll(".admin-view").forEach(x=>x.classList.add("hidden"));$("#view-"+name)?.classList.remove("hidden");document.querySelectorAll("[data-view]").forEach(x=>x.classList.toggle("active",x.dataset.view===name));$("#viewTitle").textContent=({dashboard:"Visão geral",appointments:"Agendamentos",staff:"Equipe",earnings:"Rendimentos",services:"Serviços",gallery:"Galeria",hours:"Disponibilidade",settings:"Configurações",administrators:"Administradores"})[name];loadView(name)}
  document.querySelectorAll("[data-view]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showView(a.dataset.view)}));
  document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.go)));
- async function checkSession(){if(!requireDb())return;const {data}=await db.auth.getSession();if(data.session){const {data:admin}=await db.from("admins").select("user_id").eq("user_id",data.session.user.id).maybeSingle();if(admin)enter(data.session.user);else{await db.auth.signOut();$("#loginView").classList.remove("hidden");feedback($("#loginFeedback"),"Esta conta não possui permissão administrativa. Funcionários devem usar a área individual.");}}else{$("#loginView").classList.remove("hidden");$("#adminContent").classList.add("hidden")}}
+ async function verifyAdmin(user){
+   const {data,error}=await db.from("admins").select("user_id").eq("user_id",user.id).maybeSingle();
+   if(error){
+     console.error("[Studio Beth] Erro ao verificar public.admins:",error);
+     return {ok:false,message:`Falha ao consultar permissões administrativas (código: ${error.code||"desconhecido"}). Verifique GRANT SELECT, políticas RLS e a conexão do Supabase.`};
+   }
+   if(!data){
+     console.warn("[Studio Beth] O usuário autenticado não possui registro visível em public.admins neste projeto.",user.id);
+     return {ok:false,message:"Conta autenticada, mas não encontrada em admins neste projeto. Compare a URL do Supabase no config.js publicado com a URL do projeto em que cadastrou a administradora."};
+   }
+   return {ok:true,message:""};
+ }
+ async function checkSession(){
+   if(!requireDb())return;
+   const {data,error}=await db.auth.getSession();
+   if(error)console.error("[Studio Beth] Erro ao recuperar sessão:",error);
+   if(data?.session){
+     const result=await verifyAdmin(data.session.user);
+     if(result.ok)enter(data.session.user);
+     else{
+       await db.auth.signOut();
+       $("#loginView").classList.remove("hidden");
+       $("#adminContent").classList.add("hidden");
+       feedback($("#loginFeedback"),result.message);
+     }
+   }else{
+     $("#loginView").classList.remove("hidden");
+     $("#adminContent").classList.add("hidden");
+   }
+ }
  function enter(user){currentUserId=user.id;$("#loginView").classList.add("hidden");$("#adminContent").classList.remove("hidden");$("#logoutButton").classList.remove("hidden");$("#adminEmail").textContent=user.email||"";showView("dashboard")}
- $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();if(!requireDb())return;let f=new FormData(e.currentTarget);const {data,error}=await db.auth.signInWithPassword({email:f.get("email"),password:f.get("password")});if(error)feedback($("#loginFeedback"),"Não foi possível entrar. Confira e-mail e senha.");else{const {data:admin}=await db.from("admins").select("user_id").eq("user_id",data.user.id).maybeSingle();if(!admin){await db.auth.signOut();feedback($("#loginFeedback"),"Esta conta não é administradora. Funcionários devem usar funcionario.html.");}else enter(data.user)}});
+ $("#loginForm").addEventListener("submit",async e=>{
+   e.preventDefault();
+   if(!requireDb())return;
+   const form=new FormData(e.currentTarget);
+   const {data,error}=await db.auth.signInWithPassword({email:form.get("email"),password:form.get("password")});
+   if(error){
+     console.error("[Studio Beth] Erro de autenticação:",error);
+     feedback($("#loginFeedback"),"Não foi possível entrar. Confira e-mail e senha ou a conexão do Supabase.");
+     return;
+   }
+   const result=await verifyAdmin(data.user);
+   if(!result.ok){
+     await db.auth.signOut();
+     feedback($("#loginFeedback"),result.message);
+     return;
+   }
+   enter(data.user);
+ });
  $("#logoutButton").addEventListener("click",async()=>{await db.auth.signOut();location.reload()});
  async function loadView(v){if(v==="dashboard"||v==="appointments")await loadAppointments();if(v==="staff")await loadStaff();if(v==="earnings")await loadEarnings();if(v==="dashboard"||v==="services")await loadServices();if(v==="gallery")await loadGallery();if(v==="hours")await loadHours();if(v==="settings")await loadSettings();if(v==="administrators")await loadAdministrators()}
  async function loadAppointments(){let {data,error}=await db.from("agendamentos").select("*,clientes(nome,telefone),servicos(nome),profissionais(nome)").order("data").order("horario_inicio");if(error){$("#appointmentsTable").textContent=error.message;return}appointments=data||[];let todayRows=appointments.filter(a=>a.data===today()&&!["cancelado","concluido"].includes(a.status));$("#statToday").textContent=todayRows.length;$("#statPending").textContent=appointments.filter(a=>a.status==="pendente").length;$("#statConfirmed").textContent=appointments.filter(a=>a.status==="confirmado").length;const html=tableAppointments(appointments);$("#appointmentsTable").innerHTML=html;$("#dashboardAppointments").innerHTML=tableAppointments(appointments.filter(a=>a.data>=today()&&!["cancelado","concluido"].includes(a.status)).slice(0,8));}
@@ -157,7 +203,28 @@
    const edit=e.target.closest("[data-staff-edit]");
    if(edit){const row=staffRows.find(x=>x.id===edit.dataset.staffEdit);if(row&&row.tipo!=="admin")openStaffForm(row);return;}
    const invite=e.target.closest("[data-staff-invite]");
-   if(invite){invite.disabled=true;const {data,error}=await db.functions.invoke("create-staff-invite",{body:{staff_id:invite.dataset.staffInvite}});invite.disabled=false;if(error||!data?.url){alert("Não foi possível gerar o convite. Confira se a Edge Function create-staff-invite foi publicada. "+(error?.message||""));return;}$("#invitePanel").classList.remove("hidden");$("#inviteDescription").textContent="Convite para "+(staffRows.find(x=>x.id===invite.dataset.staffInvite)?.nome||"funcionário");$("#inviteQr").innerHTML="";new QRCode($("#inviteQr"),{text:data.url,width:220,height:220});$("#inviteUrl").textContent=data.url;$("#invitePanel").scrollIntoView({behavior:"smooth"});}
+   if (invite) {
+     invite.disabled = true;
+     try {
+       const {data,error} = await db.functions.invoke("create-staff-invite", {
+         body:{staff_id:invite.dataset.staffInvite}
+       });
+       if (error) throw new Error(await describeEdgeError(error));
+       if (!data?.url) throw new Error(data?.error || data?.message || "O servidor não retornou o link do convite.");
+       $("#invitePanel").classList.remove("hidden");
+       $("#inviteDescription").textContent="Convite para "+(staffRows.find(x=>x.id===invite.dataset.staffInvite)?.nome||"funcionário");
+       $("#inviteQr").innerHTML="";
+       new QRCode($("#inviteQr"),{text:data.url,width:220,height:220});
+       $("#inviteUrl").textContent=data.url;
+       $("#invitePanel").scrollIntoView({behavior:"smooth"});
+     } catch (err) {
+       console.error("[Studio Beth] Erro ao gerar convite:",err);
+       alert("Não foi possível gerar o convite: "+(err?.message||"Erro desconhecido"));
+     } finally {
+       invite.disabled=false;
+     }
+     return;
+   }
    const toggle=e.target.closest("[data-staff-toggle]");if(toggle){const {error}=await db.from("profissionais").update({ativo:toggle.dataset.active!=="true"}).eq("id",toggle.dataset.staffToggle);if(error)alert(error.message);loadStaff();}
    const cleanup=e.target.closest("[data-staff-cleanup]");
    if(cleanup){
@@ -202,15 +269,26 @@
  async function loadSettings(){let {data,error}=await db.from("configuracoes").select("*").limit(1).maybeSingle();if(error)return;let f=$("#settingsForm");if(data)Object.entries(data).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v??""})}
  $("#settingsForm").addEventListener("submit",async e=>{e.preventDefault();let d=Object.fromEntries(new FormData(e.currentTarget));let {data:old}=await db.from("configuracoes").select("id").limit(1).maybeSingle();let q=old?db.from("configuracoes").update(d).eq("id",old.id):db.from("configuracoes").insert(d);let {error}=await q;if(error)alert(error.message);else alert("Configurações atualizadas com sucesso.")});
 
+ // Recupera o erro que o Supabase não mostra automaticamente ao retornar HTTP 4xx/5xx.
+ async function describeEdgeError(error){
+   const response=error?.context;
+   const status=typeof response?.status==="number"?`HTTP ${response.status}`:"";
+   const gatewayCode=typeof response?.headers?.get==="function"?response.headers.get("sb-error-code"):null;
+   let message="";
+   if(typeof response?.clone==="function"){
+     try{
+       const data=await response.clone().json();
+       message=String(data?.error||data?.message||data?.msg||"");
+     }catch(_){ /* resposta não JSON */ }
+   }
+   if(!message)message=String(error?.message||"Não foi possível contactar a Edge Function.");
+   return [message,status,gatewayCode?`código: ${gatewayCode}`:""].filter(Boolean).join(" — ");
+ }
  // Gerenciamento seguro de administradores via Edge Function (SERVICE_ROLE_KEY somente no servidor).
  let administratorRows=[];
  async function callAdminManager(payload){
    const {data,error}=await db.functions.invoke("manage-admins",{body:payload});
-   if(error){
-     let details=null;
-     try{ details=await error.context?.json?.(); }catch(_){}
-     throw new Error(details?.error||details?.message||error.message||"Falha ao comunicar com o servidor.");
-   }
+   if(error)throw new Error(await describeEdgeError(error));
    if(data?.error)throw new Error(data.error);
    return data;
  }
