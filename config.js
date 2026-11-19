@@ -6,3 +6,4 @@ window.STUDIO_CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_435xOyL91uNCN9nBAJfowA_0mPBWHzK",
   WHATSAPP: "5522988334019"
 };
+ 
